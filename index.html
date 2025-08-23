@@ -1,15 +1,16 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content=" width=device-width, initial-scale=1.0">
-    <title>JetLux Care – Premium Aircraft Detailing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JetLux Care – Detailing súkromných lietadiel (BTS & VIE)</title>
+    <meta name="description" content="Prémiový detailing a starostlivosť o súkromné lietadlá. Diskrétne, precízne, načas. Bratislava (BTS) & Viedeň (VIE).">
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
             background-color: #111;
             color: #fff;
             line-height: 1.6;
@@ -20,73 +21,155 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
         }
-        nav button {
-            margin-left: 1rem;
+        nav .lang-switch { display: flex; gap: .5rem; }
+        .lang-btn {
+            margin: 0;
             background: #222;
-            border: none;
+            border: 1px solid #444;
             color: #fff;
-            padding: 0.5rem 1rem;
+            padding: 0.45rem .8rem;
             cursor: pointer;
+            border-radius: 8px;
         }
-        .container {
-            padding: 2rem;
+        .lang-btn.active { border-color: #f5c542; font-weight: 600; }
+        .container { padding: 2rem; max-width: 900px; margin: 0 auto; }
+        h1 { font-size: 2.2rem; color: #f5c542; margin-bottom: .5rem; }
+        h2 { margin-top: 2rem; font-size: 1.3rem; color: #ddd; letter-spacing: .3px; }
+        a { color: #f5c542; text-decoration: none; }
+        a.btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: .6rem 1rem;
+            border: 1px solid #f5c542;
+            border-radius: 10px;
         }
-        h1 {
-            font-size: 2.2rem;
-            color: #f5c542;
-        }
-        a {
-            color: #f5c542;
-            text-decoration: none;
-        }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
-            color: #777;
-        }
+        ul { padding-left: 1.2rem; }
+        footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #777; }
     </style>
 </head>
 <body>
     <header>
         <div><strong>JetLux Care</strong></div>
         <nav>
-            <button onclick="setLanguage('en')">EN</button>
-            <button onclick="setLanguage('sk')">SK</button>
+            <div class="lang-switch" role="group" aria-label="Language switcher">
+                <button class="lang-btn" data-lang="sk" aria-pressed="true">SK</button>
+                <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+            </div>
         </nav>
     </header>
 
-    <div class="container">
-        <div id="en">
-            <h1>Premium Aircraft Detailing at BTS & VIE</h1>
-            <p>We provide elite detailing services for private jets, including exterior polishing, interior cleaning, and ceramic protection. Trusted by aircraft owners at Vienna and Bratislava airports.</p>
-            <p><strong>Contact us:</strong></p>
+    <main class="container">
+        <section>
+            <h1 data-i18n="hero.headline"></h1>
+            <p data-i18n="hero.sub"></p>
+            <a class="btn" href="https://wa.me/421947979169" target="_blank" rel="noopener" data-i18n="hero.cta"></a>
+        </section>
+
+        <section>
+            <h2 data-i18n="about.title"></h2>
+            <p data-i18n="about.text"></p>
+        </section>
+
+        <section>
+            <h2 data-i18n="contact.title"></h2>
             <ul>
-                <li><a href="https://wa.me/421947979169" target="_blank">WhatsApp: +421 947 979 169</a></li>
-                <li><a href="https://instagram.com/kristian.plavcan" target="_blank">Instagram: @kristian.plavcan</a></li>
+                <li>
+                    <strong data-i18n="contact.whatsapp_label"></strong>
+                    <a href="https://wa.me/421947979169" target="_blank" rel="noopener">+421 947 979 169</a>
+                </li>
+                <li>
+                    <strong data-i18n="contact.instagram_label"></strong>
+                    <a href="https://instagram.com/kristian.plavcan" target="_blank" rel="noopener">@kristian.plavcan</a>
+                </li>
+                <li>
+                    <strong data-i18n="contact.email_label"></strong>
+                    <a href="mailto:plavcan.kristian@gmail.com">plavcan.kristian@gmail.com</a>
+                </li>
             </ul>
-        </div>
-        <div id="sk" style="display:none">
-            <h1>Prémiové čistenie lietadiel na BTS a VIE</h1>
-            <p>Ponúkame špičkové detailingové služby pre súkromné lietadlá – leštenie exteriéru, čistenie interiéru a keramickú ochranu. Dôveryhodní vlastníkmi lietadiel vo Viedni a Bratislave.</p>
-            <p><strong>Kontaktujte nás:</strong></p>
-            <ul>
-                <li><a href="https://wa.me/421947979169" target="_blank">WhatsApp: +421 947 979 169</a></li>
-                <li><a href="https://instagram.com/kristian.plavcan" target="_blank">Instagram: @kristian.plavcan</a></li>
-            </ul>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <footer>
         &copy; 2025 JetLux Care. All rights reserved.
     </footer>
 
     <script>
-        function setLanguage(lang) {
-            document.getElementById('en').style.display = lang === 'en' ? 'block' : 'none';
-            document.getElementById('sk').style.display = lang === 'sk' ? 'block' : 'none';
-        }
+    const translations = {
+      sk: {
+        "meta.title": "JetLux Care – Detailing súkromných lietadiel (BTS & VIE)",
+        "meta.description": "Prémiový detailing a starostlivosť o súkromné lietadlá. Diskrétne, precízne, načas. Bratislava (BTS) & Viedeň (VIE).",
+
+        "hero.headline": "Prémiový detailing súkromných lietadiel na BTS a VIE",
+        "hero.sub": "Špičkové služby: leštenie exteriéru, čistenie interiéru a keramická ochrana. Dôverujú nám majitelia a operátori lietadiel na letiskách Viedeň a Bratislava.",
+        "hero.cta": "Napísať na WhatsApp",
+
+        "about.title": "Prečo JetLux Care",
+        "about.text": "Zameriavame sa na bezchybný vzhľad a hygienu kabíny. Naše postupy chránia povrchy, šetria čas posádke a zvyšujú komfort cestujúcich.",
+
+        "contact.title": "Kontakt",
+        "contact.whatsapp_label": "WhatsApp: ",
+        "contact.instagram_label": "Instagram: ",
+        "contact.email_label": "E‑mail: "
+      },
+      en: {
+        "meta.title": "JetLux Care – Premium Aircraft Detailing (BTS & VIE)",
+        "meta.description": "Premium detailing and cabin care for private jets. Discreet, precise, on time. Bratislava (BTS) & Vienna (VIE).",
+
+        "hero.headline": "Premium Aircraft Detailing at BTS & VIE",
+        "hero.sub": "Elite services: exterior polishing, interior cleaning, and ceramic protection. Trusted by aircraft owners and operators at Vienna and Bratislava airports.",
+        "hero.cta": "Message on WhatsApp",
+
+        "about.title": "Why JetLux Care",
+        "about.text": "We focus on flawless appearance and cabin hygiene. Our methods protect surfaces, save crew time, and elevate passenger comfort.",
+
+        "contact.title": "Contact",
+        "contact.whatsapp_label": "WhatsApp: ",
+        "contact.instagram_label": "Instagram: ",
+        "contact.email_label": "E‑mail: "
+      }
+    };
+
+    function applyTranslations(lang) {
+      const dict = translations[lang] || translations.sk;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) el.textContent = dict[key];
+      });
+      // Meta
+      if (dict["meta.title"]) document.title = dict["meta.title"];
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && dict["meta.description"]) metaDesc.setAttribute("content", dict["meta.description"]);
+      // Toggle active
+      document.querySelectorAll(".lang-btn").forEach(b => {
+        b.classList.toggle("active", b.dataset.lang === lang);
+        b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false");
+      });
+      document.documentElement.lang = lang;
+    }
+
+    function detectInitialLang() {
+      const saved = localStorage.getItem("lang");
+      if (saved) return saved;
+      const browser = (navigator.language || "sk").slice(0,2).toLowerCase();
+      return browser === "sk" ? "sk" : "en";
+    }
+
+    function setLang(lang) {
+      localStorage.setItem("lang", lang);
+      applyTranslations(lang);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const initial = detectInitialLang();
+      setLang(initial);
+
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.addEventListener("click", () => setLang(btn.dataset.lang));
+      });
+    });
     </script>
 </body>
 </html>
