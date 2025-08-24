@@ -119,9 +119,10 @@
       <p class="lead" data-i18n="hero.sub"></p>
       <a class="btn" href="https://wa.me/421947979169" target="_blank" rel="noopener" data-i18n="hero.cta"></a>
     
-    <section class="jl-stage" aria-label="JetLux takeoff" style="position:relative;height:56vh;min-height:380px;margin:1.25rem 0;border:1px solid var(--jl-border);border-radius:16px;overflow:hidden;isolation:isolate;background:linear-gradient(180deg,var(--jl-bg) 0%,var(--jl-bg-2) 45%,var(--jl-bg) 100%);perspective:1200px;">
+    <section class="jl-stage" aria-label="JetLux arc" style="position:relative;height:52vh;min-height:360px;margin:1.25rem 0;border:1px solid var(--jl-border);border-radius:16px;overflow:hidden;isolation:isolate;background:linear-gradient(180deg,var(--jl-bg) 0%,var(--jl-bg-2) 45%,var(--jl-bg) 100%);perspective:1200px;">
       <svg class="sky" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%">
-        <path id="jl-flight" d="M -20 106 C 6 96, 22 86, 40 78 S 80 42, 120 6" fill="none" stroke="none"/>
+        <!-- široký jemný oblúk: štart mimoľavo dole (y≈84) -> plochý priebeh -> mierny výstup do prava -->
+        <path id="jl-flight" d="M -22 84 C 6 80, 34 74, 58 70 S 112 62, 122 66" fill="none" stroke="none"/>
       </svg>
       <img id="jl-jet" alt="JetLux jet" style="position:absolute;width:clamp(120px,22vw,340px);aspect-ratio:auto;will-change:transform;pointer-events:none;filter:drop-shadow(0 12px 28px rgba(0,0,0,.45))" />
     </section>
@@ -241,7 +242,7 @@
     const imgData = ctx.getImageData(0,0,w,h);
     const d = imgData.data;
     let minX=w, minY=h, maxX=0, maxY=0;
-    const cutY = Math.floor(h*0.40);
+    const cutY = Math.floor(h*0.42);
     for(let y=0;y<cutY;y++){
       for(let x=0;x<w;x++){
         const i=(y*w+x)*4;
@@ -266,7 +267,7 @@
   function animateOnce(){
     const path=document.getElementById('jl-flight'); if(!path) return;
     gsap.registerPlugin(MotionPathPlugin);
-    gsap.fromTo(jetEl,{scale:0.9},{duration:4.2,ease:'power2.out',scale:1.0,motionPath:{path,align:path,alignOrigin:[0.5,0.5],autoRotate:true}});
+    gsap.fromTo(jetEl,{scale:0.92},{duration:3.6,ease:'power2.out',scale:1.0,motionPath:{path,align:path,alignOrigin:[0.5,0.5],autoRotate:true}});
   }
 })();
 </script>
