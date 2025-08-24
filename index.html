@@ -134,6 +134,17 @@
   .jl-trail-3{ stroke-width:0.7 !important; opacity:.18 !important }
 </style>
 
+
+<style id="lux-typography">
+  h1, h2{
+    color:transparent;
+    background-image:linear-gradient(180deg,#FFFFFF 0%, #D4D7DD 100%);
+    -webkit-background-clip:text; background-clip:text;
+  }
+  h3, h4, h5, h6, p, li{ color:#E6EDF7 }
+  a{ color:var(--jl-accent) !important; }
+</style>
+
 </head>
 <body>
   <header>
@@ -152,10 +163,21 @@
   <!-- JetLux: top-right flyover overlay -->
   <div class="jl-fly" aria-hidden="true">
     <svg viewBox="0 0 100 60" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="trailGrad" x1="1" y1="0" x2="0" y2="0">
+            <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.85"/>
+            <stop offset="60%" stop-color="#E9F0FF" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#E9F0FF" stop-opacity="0"/>
+          </linearGradient>
+          <filter id="trailBlur" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="1.2"/>
+          </filter>
+        </defs>
+        
       <path id="jl2-flight" d="M 102 14 C 88 18, 68 22, 52 20 S 18 14, -8 10" fill="none" stroke="none"/>
-      <path id="jl2-trail1" class="jl-trail" d="M 102 14 C 88 18, 68 22, 52 20 S 18 14, -8 10"/>
-      <path id="jl2-trail2" class="jl-trail-2" d="M 102 16 C 88 20, 68 24, 52 22 S 18 16, -8 12"/>
-      <path id="jl2-trail3" class="jl-trail-3" d="M 102 12 C 88 16, 68 20, 52 18 S 18 12, -8 8"/>
+      <path id="jl2-trail1" stroke="url(#trailGrad)" filter="url(#trailBlur)" stroke-width="2.2" fill="none">
+      <path id="jl2-trail2" stroke="url(#trailGrad)" filter="url(#trailBlur)" stroke-width="1.4" fill="none">
+      <path id="jl2-trail3" stroke="url(#trailGrad)" filter="url(#trailBlur)" stroke-width="0.9" fill="none">
     </svg>
     <img id="jl2-jet" alt="JetLux jet"/>
   </div>
@@ -302,8 +324,8 @@
   function play(){
     gsap.registerPlugin(MotionPathPlugin);
     trails.forEach((t,i)=>{ const len=t.getTotalLength(); t.style.strokeDasharray=len; t.style.strokeDashoffset=len;
-      gsap.to(t,{strokeDashoffset:0,duration:1.6+i*0.25,ease:"power1.out"});
-      gsap.to(t,{opacity:0,duration:1.2,delay:1.6+i*0.25,ease:"power2.out"});
+      gsap.to(t,{strokeDashoffset:0,duration:1.4+i*0.22,ease:"power1.out"});
+      gsap.to(t,{opacity:0,duration:1.2,delay:1.4+i*0.22,ease:"power2.out"});
     });
     gsap.fromTo(jet,{scale:0.88},{duration:3.0,ease:"power2.out",scale:1.0,
       motionPath:{path:path,align:path,alignOrigin:[0.5,0.5],autoRotate:true},
