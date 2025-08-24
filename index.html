@@ -92,57 +92,31 @@
     }
   </style>
 
-<style id="jl-inline-flyover">
-  .jl-first-section-rel{position:relative}
-  .jl-fly{position:absolute; top:0; right:0; width:min(520px,55vw); height:180px; pointer-events:none; z-index:1}
-  .jl-fly svg{width:100%; height:100%}
-  .jl-fly img{position:absolute; width:clamp(110px,18vw,230px); filter:drop-shadow(0 12px 26px rgba(0,0,0,.55)); will-change:transform}
-  .jl-trail{stroke:#CFE2FF; stroke-width:2.2; fill:none; opacity:.55; filter:blur(0.3px)}
-  .jl-trail-2{stroke:#ABC8FF; stroke-width:1.4; opacity:.38; filter:blur(0.6px)}
-  .jl-trail-3{stroke:#7BAAF7; stroke-width:0.9; opacity:.28; filter:blur(1px)}
-  @media (max-width:700px){ .jl-fly{height:140px} .jl-fly img{width:38vw} }
-</style>
-
-
 <style id="jetlux-navy-overrides">
   :root{ --jl-bg:#0A192F; --jl-bg-2:#112240; --jl-text:#E6EDF7; --jl-accent:#7BAAF7; --jl-border:#0f1a33; }
-  html, body { background: radial-gradient(140% 120% at 50% -10%, var(--jl-bg) 0%, var(--jl-bg-2) 45%, var(--jl-bg) 100%) !important; }
-  body, p, li, h1, h2, h3, h4, h5, h6 { color: var(--jl-text) !important; }
-  a, .link, .btn-primary { color: var(--jl-accent) !important; }
-  .btn, button { background: linear-gradient(180deg, var(--jl-bg) 0%, var(--jl-bg-2) 100%) !important; color: var(--jl-text) !important; border-color: var(--jl-border) !important; }
-  header, .section, .card, .panel { background: linear-gradient(180deg, var(--jl-bg) 0%, var(--jl-bg-2) 45%, var(--jl-bg) 100%) !important; border-color: var(--jl-border) !important; }
-</style>
-
-
-<style id="jl-flyover-tweaks">
-  .jl-first-section-rel > * { position:relative; z-index:1 } /* text above lines */
-  .jl-fly{ top:-28px !important; height:132px !important; z-index:0 !important } /* overlay higher + behind */
-  .jl-trail{ stroke-width:1.8 !important; opacity:.40 !important }
-  .jl-trail-2{ stroke-width:1.2 !important; opacity:.28 !important }
-  .jl-trail-3{ stroke-width:0.8 !important; opacity:.20 !important }
-  @media (max-width:700px){
-    .jl-fly{ top:-22px !important; height:110px !important }
-  }
-</style>
-
-
-<style id="jl-flyover-tweaks-v2">
-  .jl-first-section-rel > * { position:relative; z-index:1 } /* text above lines */
-  .jl-fly{ top:-36px !important; height:120px !important; z-index:0 !important } /* higher, shallower */
-  .jl-trail{ stroke-width:1.6 !important; opacity:.35 !important }
-  .jl-trail-2{ stroke-width:1.0 !important; opacity:.24 !important }
-  .jl-trail-3{ stroke-width:0.7 !important; opacity:.18 !important }
-</style>
-
-
-<style id="lux-typography">
+  html, body { background:
+    radial-gradient(140% 120% at 50% -10%, var(--jl-bg) 0%, var(--jl-bg-2) 45%, var(--jl-bg) 100%) !important; }
+  body, p, li { color: var(--jl-text) !important; }
   h1, h2{
-    color:transparent;
-    background-image:linear-gradient(180deg,#FFFFFF 0%, #D4D7DD 100%);
+    color:transparent; background-image:linear-gradient(180deg,#FFFFFF 0%, #D4D7DD 100%);
     -webkit-background-clip:text; background-clip:text;
   }
-  h3, h4, h5, h6, p, li{ color:#E6EDF7 }
-  a{ color:var(--jl-accent) !important; }
+  a { color: var(--jl-accent) !important; }
+  .btn, button { background: linear-gradient(180deg, var(--jl-bg) 0%, var(--jl-bg-2) 100%) !important;
+    color: var(--jl-text) !important; border-color: var(--jl-border) !important; }
+  header, .section, .card, .panel {
+    background: linear-gradient(180deg, var(--jl-bg) 0%, var(--jl-bg-2) 45%, var(--jl-bg) 100%) !important;
+    border-color: var(--jl-border) !important;
+  }
+</style>
+
+
+<style id="jl-fly-styles">
+  .jl-first-section-rel > * { position:relative; z-index:2 }
+  .jl-fly{ position:absolute; top:-36px; right:0; height:120px; pointer-events:none; z-index:1 }
+  .jl-fly svg{ width:100%; height:100% }
+  .jl-fly img{ position:absolute; width:clamp(110px,18vw,230px);
+    filter:drop-shadow(0 12px 26px rgba(0,0,0,.55)); will-change:transform }
 </style>
 
 </head>
@@ -163,21 +137,23 @@
   <!-- JetLux: top-right flyover overlay -->
   <div class="jl-fly" aria-hidden="true">
     <svg viewBox="0 0 100 60" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="trailGrad" x1="1" y1="0" x2="0" y2="0">
-            <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1"/>
-            <stop offset="60%" stop-color="#E9F0FF" stop-opacity="0"/>
-            <stop offset="100%" stop-color="#E9F0FF" stop-opacity="0"/>
-          </linearGradient>
-          <filter id="trailBlur" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="0.4"/>
-          </filter>
-        </defs>
-        
+      <defs>
+        <linearGradient id="trailGrad" x1="1" y1="0" x2="0" y2="0">
+          <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1"/>
+          <stop offset="50%" stop-color="#E9F0FF" stop-opacity="0.45"/>
+          <stop offset="100%" stop-color="#E9F0FF" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="trailBlur" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="0.6"/>
+        </filter>
+      </defs>
       <path id="jl2-flight" d="M 102 14 C 88 18, 68 22, 52 20 S 18 14, -8 10" fill="none" stroke="none"/>
-      <path id="jl2-trail1" stroke="url(#trailGrad)" filter="url(#trailBlur)" stroke-width="3" fill="none">
-      <path id="jl2-trail2" stroke="url(#trailGrad)" filter="url(#trailBlur)" stroke-width="2" fill="none">
-      <path id="jl2-trail3" stroke="url(#trailGrad)" filter="url(#trailBlur)" stroke-width="1.3" fill="none">
+      <path id="jl2-trail1" d="M 102 14 C 88 18, 68 22, 52 20 S 18 14, -8 10"
+            stroke="url(#trailGrad)" filter="url(#trailBlur)" stroke-width="2.6" fill="none"/>
+      <path id="jl2-trail2" d="M 102 16 C 88 20, 68 24, 52 22 S 18 16, -8 12"
+            stroke="url(#trailGrad)" filter="url(#trailBlur)" stroke-width="1.6" fill="none"/>
+      <path id="jl2-trail3" d="M 102 12 C 88 16, 68 20, 52 18 S 18 12, -8 8"
+            stroke="url(#trailGrad)" filter="url(#trailBlur)" stroke-width="1.1" fill="none"/>
     </svg>
     <img id="jl2-jet" alt="JetLux jet"/>
   </div>
@@ -324,10 +300,10 @@
   function play(){
     gsap.registerPlugin(MotionPathPlugin);
     trails.forEach((t,i)=>{ const len=t.getTotalLength(); t.style.strokeDasharray=len; t.style.strokeDashoffset=len;
-      gsap.to(t,{strokeDashoffset:0,duration:2.4+i*0.3,ease:"power1.out"});
-      gsap.to(t,{opacity:0,duration:1.2,delay:2.4+i*0.3,ease:"power2.out"});
+      gsap.to(t,{strokeDashoffset:0,duration:2.2+i*0.3,ease:"power1.out"});
+      gsap.to(t,{opacity:0,duration:1.4,delay:2.2+i*0.3,ease:"power2.out"});
     });
-    gsap.fromTo(jet,{scale:0.88},{duration:3.0,ease:"power2.out",scale:1.0,
+    gsap.fromTo(jet,{scale:0.9},{duration:3.2,ease:"power2.out",scale:1.0,
       motionPath:{path:path,align:path,alignOrigin:[0.5,0.5],autoRotate:true},
       onUpdate(){ const vel = MotionPathPlugin.getVelocity(jet);
         const bankAdjust=-8; const pitchTrim=-Math.min(3,Math.max(-2,vel.y*0.10));
